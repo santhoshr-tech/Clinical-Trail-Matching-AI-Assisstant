@@ -1,0 +1,228 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --text-primary: #172033;
+  --text-secondary: #4B5B73;
+  --text-tertiary: #64748B;
+  --text-muted: #7C8CA3;
+
+  --border-default: #D7E0EA;
+
+  --primary: #0891B2;
+  --primary-dark: #0E7490;
+
+  --surface: #FFFFFF;
+  --background: #F6F9FC;
+}
+
+body {
+  margin: 0;
+  background-color: var(--background);
+  color: var(--text-primary);
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Global Typography Overrides for High Readability & Contrast */
+h1, h2, h3, h4, h5, h6 {
+  color: var(--text-primary) !important;
+  font-weight: 700;
+}
+
+p, span, label, div {
+  color: var(--text-primary);
+}
+
+/* Force override pale Tailwind text utilities globally across all pages */
+.text-slate-100,
+.text-slate-200,
+.text-slate-300,
+.text-gray-100,
+.text-gray-200,
+.text-gray-300 {
+  color: #172033 !important;
+  -webkit-text-fill-color: #172033 !important;
+}
+
+.text-slate-400,
+.text-gray-400 {
+  color: #4B5B73 !important;
+  -webkit-text-fill-color: #4B5B73 !important;
+}
+
+.text-slate-500,
+.text-slate-600,
+.text-gray-500,
+.text-gray-600 {
+  color: #4B5B73 !important;
+  -webkit-text-fill-color: #4B5B73 !important;
+}
+
+.text-slate-700,
+.text-slate-800,
+.text-slate-900,
+.text-gray-700,
+.text-gray-800,
+.text-gray-900 {
+  color: #172033 !important;
+  -webkit-text-fill-color: #172033 !important;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* Main Canvas Layout Overrides */
+.bg-slate-950 {
+  background-color: var(--background) !important;
+}
+
+/* SaaS Header Navbar */
+header.saas-navbar,
+nav.bg-slate-900 {
+  background-color: #78C486 !important;
+  border-bottom: 1px solid var(--border-default) !important;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.03) !important;
+}
+
+/* AI Prescription Reader Banner White Text Override */
+.ai-prescription-header,
+.ai-prescription-header h1,
+.ai-prescription-header p,
+.ai-prescription-header span,
+.ai-prescription-header button {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
+
+/* AI Assistant Floating Chatbot Button Blue Theme & High Visibility */
+.ai-assistant-btn {
+  background-color: #2563EB !important;
+  border-color: #3B82F6 !important;
+  box-shadow: 0 10px 25px -5px rgba(37, 99, 235, 0.45), 0 8px 10px -6px rgba(37, 99, 235, 0.25) !important;
+}
+
+.ai-assistant-btn:hover {
+  background-color: #1D4ED8 !important;
+}
+
+.ai-assistant-btn,
+.ai-assistant-btn span {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
+
+/* Card Surface Styling */
+.bg-slate-900,
+.bg-slate-900\/60,
+.bg-slate-900\/80 {
+  background-color: #ffffff !important;
+  border: 1px solid var(--border-default) !important;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05) !important;
+  border-radius: 0.85rem !important;
+  color: var(--text-primary) !important;
+}
+
+.bg-slate-800 {
+  background-color: #f8fafc !important;
+  border: 1px solid var(--border-default) !important;
+  border-radius: 0.75rem !important;
+  color: var(--text-primary) !important;
+}
+
+.bg-slate-950\/60,
+.bg-slate-950\/30 {
+  background-color: #f1f5f9 !important;
+  border: 1px solid var(--border-default) !important;
+  color: var(--text-primary) !important;
+}
+
+/* Form Inputs & Controls */
+input, select, textarea {
+  background-color: #ffffff !important;
+  color: #172033 !important;
+  border: 1px solid #cbd5e1 !important;
+  border-radius: 0.5rem !important;
+  font-size: 0.875rem !important;
+}
+
+input::placeholder, select::placeholder, textarea::placeholder {
+  color: #64748B !important;
+  opacity: 1 !important;
+}
+
+input:focus, select:focus, textarea:focus {
+  border-color: #0891b2 !important;
+  box-shadow: 0 0 0 3px rgba(8, 145, 178, 0.15) !important;
+  outline: none !important;
+}
+
+/* High Contrast Badges */
+.bg-emerald-50, .bg-emerald-500\/10, .bg-emerald-950 {
+  background-color: #ecfdf5 !important;
+  border: 1px solid #a7f3d0 !important;
+}
+.text-emerald-400, .text-emerald-500, .text-emerald-600, .text-emerald-700 {
+  color: #047857 !important;
+  font-weight: 700 !important;
+}
+
+.bg-amber-50, .bg-amber-500\/10, .bg-amber-950 {
+  background-color: #fffbeb !important;
+  border: 1px solid #fde68a !important;
+}
+.text-amber-400, .text-amber-500, .text-amber-600, .text-amber-700 {
+  color: #b45309 !important;
+  font-weight: 700 !important;
+}
+
+.bg-rose-50, .bg-rose-500\/10, .bg-rose-950, .bg-red-50 {
+  background-color: #fef2f2 !important;
+  border: 1px solid #fecaca !important;
+}
+.text-rose-400, .text-rose-500, .text-rose-600, .text-rose-700, .text-red-600, .text-red-700 {
+  color: #b91c1c !important;
+  font-weight: 700 !important;
+}
+
+.bg-sky-50, .bg-cyan-50, .bg-cyan-500\/10 {
+  background-color: #f0f9ff !important;
+  border: 1px solid #bae6fd !important;
+}
+.text-sky-600, .text-sky-700, .text-cyan-600, .text-cyan-700 {
+  color: #0369a1 !important;
+  font-weight: 700 !important;
+}
+
+/* High contrast table styling */
+th {
+  color: #334155 !important;
+  font-weight: 700 !important;
+}
+td {
+  color: #172033 !important;
+}
+
+/* Transition utility */
+.smooth-transition {
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
