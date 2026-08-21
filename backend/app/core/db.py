@@ -893,13 +893,20 @@ def seed_synthetic_trials(cursor):
             """, (f"v1-{trial[0]}", trial[0], snapshot_json))
 
 def seed_synthetic_scenarios(cursor):
-    """Seed the 5 Synthetic Scenarios for Phase 3 evaluation testing."""
+    """Seed synthetic patient scenarios for evaluation testing and production demonstration."""
     scenarios = [
         ('11111111-1111-1111-1111-111111111111', 'SYNTH-SCENARIO-A', 58, 'Female', 'Site 01 - Oncology Wing', 'Stage IV Non-Small Cell Lung Cancer', 'Stage IV', 'None', 'Penicillin', 'active'),
         ('22222222-2222-2222-2222-222222222222', 'SYNTH-SCENARIO-B', 62, 'Male', 'Site 02 - General Clinic', 'Stage IV Non-Small Cell Lung Cancer', 'Stage IV', 'Hypertension', 'None', 'active'),
         ('33333333-3333-3333-3333-333333333333', 'SYNTH-SCENARIO-C', 54, 'Female', 'Site 01 - Oncology Wing', 'Stage IV Non-Small Cell Lung Cancer', 'Stage IV', 'Asthma', 'Sulfa', 'active'),
         ('44444444-4444-4444-4444-444444444444', 'SYNTH-SCENARIO-D', 71, 'Male', 'Site 03 - Regional Center', 'Stage IV Non-Small Cell Lung Cancer', 'Stage IV', 'Type 2 Diabetes', 'Latex', 'active'),
         ('55555555-5555-5555-5555-555555555555', 'SYNTH-SCENARIO-E', 67, 'Female', 'Site 01 - Oncology Wing', 'Stage IV Non-Small Cell Lung Cancer', 'Stage IV', 'None', 'None', 'active'),
+        ('66666666-6666-6666-6666-666666666666', 'SYNTH-SCENARIO-F', 64, 'Male', 'Site 01 - Oncology Wing', 'Stage IIIB Non-Small Cell Lung Cancer', 'Stage IIIB', 'Hypertension', 'None', 'active'),
+        ('77777777-7777-7777-7777-777777777777', 'SYNTH-SCENARIO-G', 52, 'Female', 'Site 02 - General Clinic', 'Invasive Ductal Carcinoma of Breast', 'Stage II', 'Hyperlipidemia', 'Penicillin', 'active'),
+        ('88888888-8888-8888-8888-888888888888', 'SYNTH-SCENARIO-H', 69, 'Male', 'Site 03 - Regional Center', 'Metastatic Colorectal Adenocarcinoma', 'Stage IV', 'Type 2 Diabetes', 'Sulfa', 'active'),
+        ('99999999-9999-9999-9999-999999999999', 'SYNTH-SCENARIO-I', 48, 'Female', 'Site 01 - Oncology Wing', 'Cutaneous Malignant Melanoma', 'Stage III', 'None', 'Latex', 'active'),
+        ('aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa', 'SYNTH-SCENARIO-J', 61, 'Male', 'Apollo Cancer Centre - Chennai', 'Stage IV Non-Small Cell Lung Cancer', 'Stage IV', 'COPD', 'None', 'active'),
+        ('bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb', 'SYNTH-SCENARIO-K', 55, 'Female', 'Tata Memorial Centre - Mumbai', 'Her2-Positive Breast Adenocarcinoma', 'Stage III', 'Thyroid Disorder', 'Penicillin', 'active'),
+        ('cccccccc-cccc-cccc-cccc-cccccccccccc', 'SYNTH-SCENARIO-L', 73, 'Male', 'AIIMS Clinical Trial Center - New Delhi', 'Prostate Adenocarcinoma', 'Stage IV', 'Cardiovascular Disease', 'None', 'active'),
     ]
 
     for pat in scenarios:
@@ -909,6 +916,11 @@ def seed_synthetic_scenarios(cursor):
             INSERT INTO patients (id, mrn_synthetic, age, gender, location, primary_diagnosis, disease_stage, comorbidities, allergies, patient_status, synthetic_data_flag, source)
             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1, 'scenario_seed');
             """, pat)
+            # Add initial timeline event
+            cursor.execute("""
+            INSERT INTO patient_timeline (id, patient_id, event_type, event_date, summary, raw_snippet, verification_status)
+            VALUES (?, ?, 'DIAGNOSIS', '2026-05-10', ?, ?, 'verified');
+            """, (f"t-{pat[0][:8]}", pat[0], f"Diagnosed with {pat[5]}", f"Synthetic baseline clinical note for {pat[1]} confirmed."))
 
     # Scenario A Facts (Fully Eligible)
     cursor.execute("SELECT COUNT(*) FROM patient_labs WHERE patient_id = '11111111-1111-1111-1111-111111111111';")
