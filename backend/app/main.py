@@ -22,10 +22,16 @@ def startup_event():
     logger.info("Initializing database schemas on app startup...")
     init_db()
 
-# Enable CORS for frontend Vite dev server
+# Enable CORS for frontend Vite dev server and production Render deployment
+allowed_origins = [
+    "http://localhost:5173",
+    "http://127.0.0.1:5173",
+    "https://clinical-trail-matching-ai-assisstant-1.onrender.com",
+]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=allowed_origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
