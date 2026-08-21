@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { PageWrapper } from '../components/PageWrapper';
 import { ScrollText, ShieldCheck, Lock, Activity } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
+import { BASE_URL } from '../utils/apiClient';
 
 export const AuditLogsPage: React.FC = () => {
   const [logs, setLogs] = useState<any[]>([]);
@@ -10,7 +11,7 @@ export const AuditLogsPage: React.FC = () => {
   const { user } = useAuth();
 
   useEffect(() => {
-    fetch('/api/v1/audit/logs', {
+    fetch(`${BASE_URL}/api/v1/audit/logs`, {
       headers: {
         'X-User-Email': user?.email || '',
         'X-User-Role': user?.role || '',

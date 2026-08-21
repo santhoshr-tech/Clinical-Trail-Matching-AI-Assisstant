@@ -3,6 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import { PageWrapper } from '../components/PageWrapper';
 import { Clock, Calendar, CheckCircle2, ArrowLeft, Activity, Tag, FileText } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
+import { BASE_URL } from '../utils/apiClient';
 
 export const PatientTimelinePage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -12,7 +13,7 @@ export const PatientTimelinePage: React.FC = () => {
   const { user } = useAuth();
 
   useEffect(() => {
-    fetch(`/api/v1/patients/${id}/timeline`, {
+    fetch(`${BASE_URL}/api/v1/patients/${id}/timeline`, {
       headers: {
         'X-User-Email': user?.email || '',
         'X-User-Role': user?.role || '',

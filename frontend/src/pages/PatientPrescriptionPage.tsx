@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useAuth } from '../context/AuthContext';
+import { BASE_URL } from '../utils/apiClient';
 import {
   Upload, FileText, CheckCircle, AlertTriangle, Eye, Sparkles, RefreshCw,
   Brain, Stethoscope, Pill, Info, X, ImageIcon, ClipboardList
@@ -104,7 +105,7 @@ export const PatientPrescriptionPage: React.FC<PatientPrescriptionPageProps> = (
   const fetchPrescription = async () => {
     setLoading(true);
     try {
-      const res = await fetch('/api/v1/patient-portal/prescription', {
+      const res = await fetch(`${BASE_URL}/api/v1/patient-portal/prescription`, {
         headers: {
           'X-User-Email': user?.email || 'patient@clinicaltrial.ai',
           'X-User-Role': user?.role || 'patient',
@@ -124,7 +125,7 @@ export const PatientPrescriptionPage: React.FC<PatientPrescriptionPageProps> = (
 
   const fetchMissedAlerts = async () => {
     try {
-      const res = await fetch('/api/v1/notifications');
+      const res = await fetch(`${BASE_URL}/api/v1/notifications`);
       const data = await res.json();
       if (data.success && Array.isArray(data.data)) {
         const missed = data.data.filter((n: any) => n.title && n.title.toLowerCase().includes('missed'));
@@ -175,7 +176,7 @@ export const PatientPrescriptionPage: React.FC<PatientPrescriptionPageProps> = (
       setTranslationError(null);
       console.log(`[TRANSLATION FRONTEND] Initiating API call to translate text to '${currentLanguage}'... Original text length:`, prescription.transcribedText.length);
       try {
-        const res = await fetch('/api/v1/patient-portal/translate', {
+        const res = await fetch(`${BASE_URL}/api/v1/patient-portal/translate`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -245,7 +246,7 @@ export const PatientPrescriptionPage: React.FC<PatientPrescriptionPageProps> = (
     formData.append('file', file);
 
     try {
-      const res = await fetch('/api/v1/patient-portal/upload-prescription', {
+      const res = await fetch(`${BASE_URL}/api/v1/patient-portal/upload-prescription`, {
         method: 'POST',
         headers: {
           'X-User-Email': user?.email || 'patient@clinicaltrial.ai',

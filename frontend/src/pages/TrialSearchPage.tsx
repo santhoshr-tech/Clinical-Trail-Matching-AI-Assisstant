@@ -3,6 +3,7 @@ import { PageWrapper } from '../components/PageWrapper';
 import { Search, Filter, Database, ExternalLink, Sparkles, CheckCircle2, ArrowRight, ShieldCheck, RefreshCw, MapPin, List } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import { BASE_URL } from '../utils/apiClient';
 import { TrialSiteMap } from '../components/TrialSiteMap';
 
 export const TrialSearchPage: React.FC = () => {
@@ -37,7 +38,7 @@ export const TrialSearchPage: React.FC = () => {
     if (biomarker) params.append('biomarker', biomarker);
     params.append('search_mode', searchMode);
 
-    fetch(`/api/v1/trials/search?${params.toString()}`, {
+    fetch(`${BASE_URL}/api/v1/trials/search?${params.toString()}`, {
       headers: {
         'X-User-Email': user?.email || '',
         'X-User-Role': user?.role || '',
@@ -69,7 +70,7 @@ export const TrialSearchPage: React.FC = () => {
     if (!nctToImport.trim()) return;
 
     setImporting(true);
-    fetch(`/api/v1/trials/import/${encodeURIComponent(nctToImport.trim())}`, {
+    fetch(`${BASE_URL}/api/v1/trials/import/${encodeURIComponent(nctToImport.trim())}`, {
       method: 'POST',
       headers: {
         'X-User-Email': user?.email || '',

@@ -3,6 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import { PageWrapper } from '../components/PageWrapper';
 import { User, Activity, Clock, AlertTriangle, ShieldCheck, FileSpreadsheet, Plus, AlertCircle, Calendar } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
+import { BASE_URL } from '../utils/apiClient';
 
 export const PatientDetailsPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -23,7 +24,7 @@ export const PatientDetailsPage: React.FC = () => {
   const { user } = useAuth();
 
   useEffect(() => {
-    fetch(`/api/v1/patients/${id}`, {
+    fetch(`${BASE_URL}/api/v1/patients/${id}`, {
       headers: {
         'X-User-Email': user?.email || '',
         'X-User-Role': user?.role || '',
@@ -48,7 +49,7 @@ export const PatientDetailsPage: React.FC = () => {
 
   const handleAddFact = (e: React.FormEvent) => {
     e.preventDefault();
-    fetch(`/api/v1/patients/${id}/facts`, {
+    fetch(`${BASE_URL}/api/v1/patients/${id}/facts`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

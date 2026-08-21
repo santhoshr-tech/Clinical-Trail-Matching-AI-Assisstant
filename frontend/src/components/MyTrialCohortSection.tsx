@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Users, TrendingUp, TrendingDown, AlertTriangle, CheckCircle2, UserX, Calendar, Plus, RefreshCw, Activity, ArrowRight, ShieldCheck } from 'lucide-react';
 import { ResponsiveContainer, LineChart, Line, XAxis, YAxis, Tooltip, CartesianGrid } from 'recharts';
 import { useAuth } from '../context/AuthContext';
+import { BASE_URL } from '../utils/apiClient';
 
 export const MyTrialCohortSection: React.FC = () => {
   const [trials, setTrials] = useState<any[]>([]);
@@ -27,7 +28,7 @@ export const MyTrialCohortSection: React.FC = () => {
 
   useEffect(() => {
     // Fetch available trials
-    fetch('/api/v1/trials/search', {
+    fetch(`${BASE_URL}/api/v1/trials/search`, {
       headers: {
         'X-User-Email': user?.email || '',
         'X-User-Role': user?.role || '',
@@ -48,7 +49,7 @@ export const MyTrialCohortSection: React.FC = () => {
   const fetchCohort = () => {
     if (!selectedTrialId) return;
     setLoading(true);
-    fetch(`/api/v1/enrollment/cohort/${selectedTrialId}`, {
+    fetch(`${BASE_URL}/api/v1/enrollment/cohort/${selectedTrialId}`, {
       headers: {
         'X-User-Email': user?.email || '',
         'X-User-Role': user?.role || '',
@@ -78,7 +79,7 @@ export const MyTrialCohortSection: React.FC = () => {
     setSubmittingProgress(true);
     setUploadFeedback(null);
 
-    fetch('/api/v1/enrollment/progress', {
+    fetch(`${BASE_URL}/api/v1/enrollment/progress`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -106,7 +107,7 @@ export const MyTrialCohortSection: React.FC = () => {
     if (!discontinueTarget) return;
     setDiscontinuing(true);
 
-    fetch('/api/v1/enrollment/discontinue', {
+    fetch(`${BASE_URL}/api/v1/enrollment/discontinue`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

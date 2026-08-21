@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { MessageSquare, Send, Sparkles, AlertTriangle, X, Bot, User, ExternalLink, ShieldCheck, RefreshCw } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import { BASE_URL } from '../utils/apiClient';
 
 interface ChatbotModalProps {
   isOpen: boolean;
@@ -56,7 +57,7 @@ export const ChatbotModal: React.FC<ChatbotModalProps> = ({ isOpen, onClose }) =
     setMessages((prev) => [...prev, userMsg]);
     setLoading(true);
 
-    fetch('/api/v1/chatbot/query', {
+    fetch(`${BASE_URL}/api/v1/chatbot/query`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

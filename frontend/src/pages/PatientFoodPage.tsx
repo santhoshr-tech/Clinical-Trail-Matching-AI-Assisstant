@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
+import { BASE_URL } from '../utils/apiClient';
 import { Apple, AlertTriangle, ShieldCheck, CheckCircle2, XCircle, Zap, RefreshCw } from 'lucide-react';
 import { FoodGuidanceItem } from '../types';
 
@@ -16,7 +17,7 @@ export const PatientFoodPage: React.FC<PatientFoodPageProps> = ({ currentLanguag
   const fetchFoodGuidance = async () => {
     setLoading(true);
     try {
-      const res = await fetch('/api/v1/patient-portal/food-guidance', {
+      const res = await fetch(`${BASE_URL}/api/v1/patient-portal/food-guidance`, {
         headers: {
           'X-User-Email': user?.email || '',
           'X-User-Role': user?.role || 'patient',

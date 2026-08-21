@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { MapPin, Navigation, Compass, AlertCircle, CheckCircle, Search, Sliders, ArrowRight, Save, Building } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import { BASE_URL } from '../utils/apiClient';
 
 interface TrialSiteMapProps {
   embedded?: boolean;
@@ -50,7 +51,7 @@ export const TrialSiteMap: React.FC<TrialSiteMapProps> = ({ embedded = false }) 
 
   const fetchNearbySites = () => {
     setLoading(true);
-    fetch(`/api/v1/location/nearby-sites?lat=${userLat}&lon=${userLon}&radius_km=${radiusKm}`)
+    fetch(`${BASE_URL}/api/v1/location/nearby-sites?lat=${userLat}&lon=${userLon}&radius_km=${radiusKm}`)
       .then((res) => res.json())
       .then((data) => {
         if (data.success && Array.isArray(data.data)) {
@@ -98,7 +99,7 @@ export const TrialSiteMap: React.FC<TrialSiteMapProps> = ({ embedded = false }) 
 
   const handleSaveLocationToProfile = () => {
     const locText = manualCity || `Lat: ${userLat.toFixed(4)}, Lon: ${userLon.toFixed(4)}`;
-    fetch('/api/v1/location/save-patient-location', {
+    fetch(`${BASE_URL}/api/v1/location/save-patient-location`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ patient_id: user?.email || 'patient-01', address_text: locText }),

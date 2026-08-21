@@ -3,6 +3,7 @@ import { PageWrapper } from '../components/PageWrapper';
 import { Users, Search, Plus, Calendar, MapPin, AlertCircle, ShieldAlert, CheckCircle2, Filter, X } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import { BASE_URL } from '../utils/apiClient';
 
 export const PatientListPage: React.FC = () => {
   const [patients, setPatients] = useState<any[]>([]);
@@ -28,7 +29,7 @@ export const PatientListPage: React.FC = () => {
 
   const fetchPatients = (query: string = '') => {
     setLoading(true);
-    const url = query ? `/api/v1/patients?query=${encodeURIComponent(query)}` : '/api/v1/patients';
+    const url = query ? `${BASE_URL}/api/v1/patients?query=${encodeURIComponent(query)}` : `${BASE_URL}/api/v1/patients`;
     fetch(url, {
       headers: {
         'X-User-Email': user?.email || '',
@@ -70,7 +71,7 @@ export const PatientListPage: React.FC = () => {
 
   const handleCreatePatient = (e: React.FormEvent) => {
     e.preventDefault();
-    fetch('/api/v1/patients', {
+    fetch(`${BASE_URL}/api/v1/patients`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

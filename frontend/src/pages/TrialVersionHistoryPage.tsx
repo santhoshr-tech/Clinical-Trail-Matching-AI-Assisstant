@@ -3,6 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import { PageWrapper } from '../components/PageWrapper';
 import { History, ArrowLeft, GitCommit, Clock, CheckCircle, Shield } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
+import { BASE_URL } from '../utils/apiClient';
 
 export const TrialVersionHistoryPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -12,7 +13,7 @@ export const TrialVersionHistoryPage: React.FC = () => {
   const { user } = useAuth();
 
   useEffect(() => {
-    fetch(`/api/v1/trials/${id}/versions`, {
+    fetch(`${BASE_URL}/api/v1/trials/${id}/versions`, {
       headers: {
         'X-User-Email': user?.email || '',
         'X-User-Role': user?.role || '',

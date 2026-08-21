@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { PageWrapper } from '../components/PageWrapper';
 import { Settings, ShieldCheck, Cpu, Database, Globe } from 'lucide-react';
 import { ProviderHealthStatus } from '../types';
+import { BASE_URL } from '../utils/apiClient';
 
 export const SettingsPage: React.FC = () => {
   const [healthStatus, setHealthStatus] = useState<ProviderHealthStatus | null>(null);
@@ -9,7 +10,7 @@ export const SettingsPage: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    fetch('/api/config/status')
+    fetch(`${BASE_URL}/api/config/status`)
       .then((res) => {
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         return res.json();

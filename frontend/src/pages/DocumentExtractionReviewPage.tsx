@@ -3,6 +3,7 @@ import { useParams, useNavigate, Link } from 'react-router-dom';
 import { PageWrapper } from '../components/PageWrapper';
 import { FileText, CheckCircle2, AlertTriangle, ShieldCheck, RefreshCw, Clock, Cpu, Tag, History } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
+import { BASE_URL } from '../utils/apiClient';
 
 export const DocumentExtractionReviewPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -16,7 +17,7 @@ export const DocumentExtractionReviewPage: React.FC = () => {
   const { user } = useAuth();
 
   const fetchDoc = () => {
-    fetch(`/api/v1/documents/${id}`, {
+    fetch(`${BASE_URL}/api/v1/documents/${id}`, {
       headers: {
         'X-User-Email': user?.email || '',
         'X-User-Role': user?.role || '',
@@ -42,7 +43,7 @@ export const DocumentExtractionReviewPage: React.FC = () => {
 
   const handleRetryExtraction = () => {
     setRetrying(true);
-    fetch(`/api/v1/documents/${id}/retry`, {
+    fetch(`${BASE_URL}/api/v1/documents/${id}/retry`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -79,7 +80,7 @@ export const DocumentExtractionReviewPage: React.FC = () => {
     }
 
     setApproving(true);
-    fetch(`/api/v1/documents/${id}/approve`, {
+    fetch(`${BASE_URL}/api/v1/documents/${id}/approve`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

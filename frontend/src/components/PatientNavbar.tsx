@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import { BASE_URL } from '../utils/apiClient';
 import {
   FileText,
   Pill,
@@ -43,7 +44,7 @@ export const PatientNavbar: React.FC<PatientNavbarProps> = ({
     onLanguageChange(lang);
     setLangDropdownOpen(false);
     try {
-      await fetch('/api/v1/patient-portal/preferences', {
+      await fetch(`${BASE_URL}/api/v1/patient-portal/preferences`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

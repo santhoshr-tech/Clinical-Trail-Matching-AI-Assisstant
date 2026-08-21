@@ -7,7 +7,7 @@ import {
   Award, Layers, ChevronRight, Tag, Users
 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
-import { apiGet, apiPost } from '../utils/apiClient';
+import { apiGet, apiPost, BASE_URL } from '../utils/apiClient';
 
 interface Criterion {
   id: string;
@@ -85,7 +85,7 @@ export const TrialDetailsPage: React.FC = () => {
 
   const fetchTrial = () => {
     setLoading(true);
-    fetch(`/api/v1/trials/${id}`, { headers: hdrs })
+    fetch(`${BASE_URL}/api/v1/trials/${id}`, { headers: hdrs })
       .then(r => r.json())
       .then(d => {
         if (d.success && d.data) {
@@ -110,7 +110,7 @@ export const TrialDetailsPage: React.FC = () => {
 
   const handleSync = () => {
     setSyncing(true);
-    fetch(`/api/v1/trials/${id}/sync`, { method: 'POST', headers: hdrs })
+    fetch(`${BASE_URL}/api/v1/trials/${id}/sync`, { method: 'POST', headers: hdrs })
       .then(r => r.json())
       .then(d => { if (d.success) fetchTrial(); })
       .finally(() => setSyncing(false));

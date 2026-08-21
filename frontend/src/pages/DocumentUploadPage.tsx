@@ -3,6 +3,7 @@ import { PageWrapper } from '../components/PageWrapper';
 import { UploadCloud, FileText, CheckCircle2, AlertCircle, ArrowRight, ShieldCheck, Cpu, Target, UserCheck, XCircle } from 'lucide-react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import { BASE_URL } from '../utils/apiClient';
 
 export const DocumentUploadPage: React.FC = () => {
   const [patients, setPatients] = useState<any[]>([]);
@@ -23,7 +24,7 @@ export const DocumentUploadPage: React.FC = () => {
 
   useEffect(() => {
     // Fetch synthetic patients
-    fetch('/api/v1/patients', {
+    fetch(`${BASE_URL}/api/v1/patients`, {
       headers: {
         'X-User-Email': user?.email || '',
         'X-User-Role': user?.role || '',
@@ -39,7 +40,7 @@ export const DocumentUploadPage: React.FC = () => {
       .catch((err) => console.error(err));
 
     // Fetch clinical trials for disease-agnostic selection
-    fetch('/api/v1/trials/search', {
+    fetch(`${BASE_URL}/api/v1/trials/search`, {
       headers: {
         'X-User-Email': user?.email || '',
         'X-User-Role': user?.role || '',
@@ -95,7 +96,7 @@ export const DocumentUploadPage: React.FC = () => {
     formData.append('document_category', documentCategory);
     formData.append('apply_ocr', applyOcr ? 'true' : 'false');
 
-    fetch('/api/v1/documents/upload', {
+    fetch(`${BASE_URL}/api/v1/documents/upload`, {
       method: 'POST',
       headers: {
         'X-User-Email': user?.email || '',
@@ -125,7 +126,7 @@ export const DocumentUploadPage: React.FC = () => {
     setScreeningResult(null);
     setEnrollmentResult(null);
 
-    fetch('/api/v1/enrollment/screen', {
+    fetch(`${BASE_URL}/api/v1/enrollment/screen`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -149,7 +150,7 @@ export const DocumentUploadPage: React.FC = () => {
   const handleConfirmEnrollment = () => {
     if (!screeningResult || !selectedPatientId || !selectedTrialId) return;
 
-    fetch('/api/v1/enrollment/confirm', {
+    fetch(`${BASE_URL}/api/v1/enrollment/confirm`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
+import { BASE_URL } from '../utils/apiClient';
 import { Pill, ShieldCheck, AlertTriangle, ShoppingBag, ExternalLink, Activity, RefreshCw } from 'lucide-react';
 import { PatientMedicine, PatientConditionInfo } from '../types';
 import { PatientPurchaseModal } from '../components/PatientPurchaseModal';
@@ -20,7 +21,7 @@ export const PatientMedicinePage: React.FC<PatientMedicinePageProps> = ({ curren
   const fetchMedicineData = async () => {
     setLoading(true);
     try {
-      const res = await fetch('/api/v1/patient-portal/medicines', {
+      const res = await fetch(`${BASE_URL}/api/v1/patient-portal/medicines`, {
         headers: {
           'X-User-Email': user?.email || '',
           'X-User-Role': user?.role || 'patient',

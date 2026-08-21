@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { UserRole, UserProfile } from '../types';
+import { BASE_URL } from '../utils/apiClient';
 
 interface AuthContextType {
   user: UserProfile | null;
@@ -32,7 +33,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const login = async (email: string, role: UserRole) => {
     try {
-      const res = await fetch('/api/v1/auth/login', {
+      const res = await fetch(`${BASE_URL}/api/v1/auth/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, role }),
@@ -64,7 +65,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const logout = async () => {
     try {
-      await fetch('/api/v1/auth/logout', {
+      await fetch(`${BASE_URL}/api/v1/auth/logout`, {
         method: 'POST',
         headers: {
           'X-User-Email': user?.email || '',

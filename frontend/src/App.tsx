@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider, useAuth } from './context/AuthContext';
+import { BASE_URL } from './utils/apiClient';
 import { DisclaimerBanner } from './components/Banner';
 import { Navbar } from './components/Navbar';
 import { PatientNavbar } from './components/PatientNavbar';
@@ -51,7 +52,7 @@ const AppContent: React.FC = () => {
   // Load language preference on login
   useEffect(() => {
     if (user?.role === 'patient') {
-      fetch('/api/v1/patient-portal/preferences', {
+      fetch(`${BASE_URL}/api/v1/patient-portal/preferences`, {
         headers: {
           'X-User-Email': user.email,
           'X-User-Role': user.role,
