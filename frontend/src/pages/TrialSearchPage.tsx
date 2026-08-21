@@ -194,7 +194,7 @@ export const TrialSearchPage: React.FC = () => {
           </div>
 
           {/* Filters Grid */}
-          <div className="grid grid-cols-2 sm:grid-cols-5 gap-3 text-xs">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 text-xs">
             <div>
               <label className="block text-[10px] text-slate-400 font-mono mb-1">Condition</label>
               <input
@@ -276,17 +276,17 @@ export const TrialSearchPage: React.FC = () => {
           <div className="space-y-4">
             <div className="flex items-center justify-between text-xs text-slate-400 font-mono">
               <span>Showing {trials.length} Ranked Trials</span>
-              <span>Search Engine: {searchMode === 'semantic' ? 'Semantic Vector Embedding' : 'Lexical BM25'}</span>
+              <span className="hidden sm:inline">Search Engine: {searchMode === 'semantic' ? 'Semantic Vector Embedding' : 'Lexical BM25'}</span>
             </div>
 
             {trials.map((t) => (
               <div
                 key={t.id}
-                className="bg-slate-900 border border-slate-800 hover:border-cyan-500/60 rounded-xl p-5 space-y-3 transition-all cursor-pointer group"
+                className="bg-slate-900 border border-slate-800 hover:border-cyan-500/60 rounded-xl p-4 sm:p-5 space-y-3 transition-all cursor-pointer group"
                 onClick={() => (window.location.href = `/trials/${t.nctId}`)}
               >
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-800 pb-3">
-                  <div className="flex items-center space-x-3">
+                  <div className="flex flex-wrap items-center gap-2">
                     <span className="font-mono text-sm font-bold text-cyan-400 group-hover:text-cyan-300 transition-colors">{t.nctId}</span>
                     <span className="bg-slate-800 text-slate-300 px-2 py-0.5 rounded text-[11px] font-mono">
                       {t.phase}
@@ -327,7 +327,7 @@ export const TrialSearchPage: React.FC = () => {
                 </div>
 
                 {/* Footer Link & Actions */}
-                <div className="pt-2 border-t border-slate-800 flex items-center justify-between text-xs" onClick={(e) => e.stopPropagation()}>
+                <div className="pt-2 border-t border-slate-800 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 text-xs" onClick={(e) => e.stopPropagation()}>
                   <a
                     href={t.sourceUrl}
                     target="_blank"
@@ -338,7 +338,7 @@ export const TrialSearchPage: React.FC = () => {
                     <ExternalLink className="w-3 h-3" />
                   </a>
 
-                  <div className="flex items-center space-x-3">
+                  <div className="flex items-center space-x-3 w-full sm:w-auto justify-between sm:justify-start">
                     <Link
                       to={`/trials/${t.nctId}/versions`}
                       className="text-slate-400 hover:text-cyan-300 text-[11px] font-mono"
@@ -347,7 +347,7 @@ export const TrialSearchPage: React.FC = () => {
                     </Link>
                     <Link
                       to={`/trials/${t.nctId}`}
-                      className="bg-cyan-950/60 hover:bg-cyan-900 text-cyan-300 border border-cyan-800 px-3 py-1 rounded-md text-[11px] font-medium flex items-center space-x-1"
+                      className="bg-cyan-950/60 hover:bg-cyan-900 text-cyan-300 border border-cyan-800 px-3 py-1.5 rounded-md text-[11px] font-medium flex items-center space-x-1 min-h-[36px]"
                     >
                       <span>Protocol Details &amp; Match</span>
                       <ArrowRight className="w-3.5 h-3.5" />

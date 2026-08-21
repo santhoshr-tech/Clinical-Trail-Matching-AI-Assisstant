@@ -39,13 +39,13 @@ export const LoginPage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-[80vh] flex flex-col items-center justify-center p-4">
-      <div className="bg-slate-900 border border-slate-800 rounded-2xl p-8 max-w-md w-full shadow-2xl space-y-6">
+    <div className="min-h-[85vh] flex flex-col items-center justify-center p-3 sm:p-4">
+      <div className="bg-slate-900 border border-slate-800 rounded-2xl p-5 sm:p-8 max-w-md w-full shadow-2xl space-y-6">
         <div className="text-center space-y-2">
           <div className="inline-flex p-3 rounded-xl bg-cyan-500/10 text-cyan-400 mb-2 border border-cyan-500/20">
             <ShieldCheck className="w-8 h-8" />
           </div>
-          <h1 className="text-2xl font-bold text-white">Clinical Research Portal</h1>
+          <h1 className="text-xl sm:text-2xl font-bold text-white">Clinical Research Portal</h1>
           <p className="text-xs text-slate-400">
             Supabase Auth & RBAC Security Foundation (Phase 2)
           </p>
@@ -57,7 +57,7 @@ export const LoginPage: React.FC = () => {
             <select
               value={selectedRole}
               onChange={(e) => handleRoleChange(e.target.value as UserRole)}
-              className="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-2 text-sm text-slate-200 focus:outline-none focus:border-cyan-500"
+              className="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-2.5 text-sm text-slate-200 focus:outline-none focus:border-cyan-500 min-h-[44px]"
             >
               <option value="patient">Patient (Restricted Portal)</option>
               <option value="research_coordinator">Research Coordinator (CRC)</option>
@@ -74,7 +74,7 @@ export const LoginPage: React.FC = () => {
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-2 text-sm text-slate-200 focus:outline-none focus:border-cyan-500"
+              className="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-2.5 text-sm text-slate-200 focus:outline-none focus:border-cyan-500 min-h-[44px]"
               required
             />
           </div>
@@ -82,7 +82,7 @@ export const LoginPage: React.FC = () => {
           <button
             type="submit"
             disabled={loading}
-            className="w-full flex items-center justify-center space-x-2 bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white font-semibold py-2.5 px-4 rounded-lg transition-all shadow-lg shadow-cyan-950 disabled:opacity-50"
+            className="w-full flex items-center justify-center space-x-2 bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white font-semibold py-3 px-4 rounded-lg transition-all shadow-lg shadow-cyan-950 disabled:opacity-50 min-h-[44px] text-sm"
           >
             <Lock className="w-4 h-4" />
             <span>{loading ? 'Authenticating...' : 'Sign In & Log Session'}</span>

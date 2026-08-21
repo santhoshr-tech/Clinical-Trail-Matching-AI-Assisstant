@@ -376,7 +376,7 @@ export const TrialDetailsPage: React.FC = () => {
                           </div>
                           <p className="text-xs text-slate-200 leading-snug">"{cr.raw_text}"</p>
                           {cr.patient_value && (
-                            <div className="grid grid-cols-2 gap-1.5 text-[10px]">
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5 text-[10px]">
                               <div className="bg-slate-900 rounded px-2 py-1 border border-slate-700">
                                 <span className="text-slate-500 block">Patient</span>
                                 <span className="text-sky-300 font-mono">{cr.patient_value}</span>

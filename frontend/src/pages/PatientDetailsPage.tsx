@@ -83,40 +83,28 @@ export const PatientDetailsPage: React.FC = () => {
     >
       <div className="space-y-6">
         {/* Header Profile Card */}
-        <div className="bg-slate-900 border border-slate-800 rounded-xl p-6 space-y-4">
-          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-800 pb-4">
+        <div className="bg-slate-900 border border-slate-800 rounded-xl p-4 sm:p-6 space-y-4">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-800 pb-4">
             <div>
               <div className="flex items-center space-x-3">
-                <h2 className="text-xl font-bold font-mono text-cyan-400">{profile.mrnSynthetic}</h2>
-                <span className="bg-slate-800 text-slate-300 px-2.5 py-0.5 rounded text-xs font-mono">
-                  Version {profile.version}
-                </span>
-                <span className="bg-cyan-950 text-cyan-300 border border-cyan-800 px-2 py-0.5 rounded text-[10px]">
-                  100% Synthetic Prototype
+                <h2 className="text-xl sm:text-2xl font-bold text-slate-100">{profile.mrnSynthetic}</h2>
+                <span className="bg-cyan-950 text-cyan-300 border border-cyan-800 px-2 py-0.5 rounded text-xs font-mono">
+                  v{profile.version}
                 </span>
               </div>
-              <p className="text-sm font-semibold text-slate-200 mt-1">{profile.primaryDiagnosis}</p>
+              <p className="text-xs text-slate-400 mt-1">{profile.primaryDiagnosis}</p>
             </div>
-            <div className="flex items-center space-x-3">
-              <button
-                onClick={() => setShowFactModal(true)}
-                className="flex items-center space-x-1.5 bg-cyan-600 hover:bg-cyan-500 text-white text-xs px-3 py-2 rounded-lg font-semibold shadow-md shadow-cyan-950 transition-colors"
-              >
-                <Plus className="w-4 h-4" />
-                <span>Add Clinical Fact</span>
-              </button>
+            <div className="flex items-center space-x-2">
               <Link
-                to={`/patients/${profile.id}/timeline`}
-                className="flex items-center space-x-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs px-3 py-2 rounded-lg border border-slate-700 transition-colors"
+                to={`/patients/${id}/timeline`}
+                className="bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs px-3 py-2 rounded-lg font-medium border border-slate-700 transition-colors"
               >
-                <Clock className="w-4 h-4 text-cyan-400" />
-                <span>View Timeline</span>
+                View Timeline History
               </Link>
             </div>
           </div>
 
-          {/* Profile Details Grid */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-xs">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs">
             <div className="bg-slate-950 p-3 rounded-lg border border-slate-800">
               <span className="text-slate-400 block text-[10px] uppercase font-mono">Demographics</span>
               <span className="text-slate-200 font-medium">{profile.age} yrs • {profile.gender}</span>
@@ -137,8 +125,8 @@ export const PatientDetailsPage: React.FC = () => {
         </div>
 
         {/* Clinical Facts Sub-tabs */}
-        <div className="bg-slate-900 border border-slate-800 rounded-xl p-6 space-y-6">
-          <div className="flex border-b border-slate-800 space-x-4">
+        <div className="bg-slate-900 border border-slate-800 rounded-xl p-4 sm:p-6 space-y-6">
+          <div className="flex border-b border-slate-800 space-x-4 overflow-x-auto scrollbar-none whitespace-nowrap">
             <button
               onClick={() => setActiveTab('labs')}
               className={`pb-2.5 text-xs font-semibold border-b-2 transition-colors ${
